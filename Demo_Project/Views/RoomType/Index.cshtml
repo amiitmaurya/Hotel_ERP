@@ -1,0 +1,118 @@
+﻿@model IEnumerable<Demo_Project.Models.RoomType>
+
+<link href="~/css/roomtypemaster/index.css" rel="stylesheet" />
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show">
+        @TempData["Success"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+}
+
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show">
+        @TempData["Error"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+}
+
+<div class="roomtype-wrapper">
+
+    <div class="roomtype-header">
+
+        <div>
+            <h2>🏨 Room Type Management</h2>
+            <p>Manage hotel room categories, pricing and capacity</p>
+        </div>
+
+        <a asp-action="Create"
+               class="btn-create">
+            + Add Room Type
+        </a>
+
+    </div>
+
+    <div class="stats-box">
+        Total Room Types : @Model.Count()
+    </div>
+
+    <div class="table-responsive">
+
+        <table class="roomtype-table">
+
+            <thead>
+                <tr>
+                    <th>Room Type</th>
+                    <th>Max Guests</th>
+                    <th>Base Price</th>
+                    <th>Status</th>
+                    <th width="260">Actions</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+
+                        <td>
+                            <strong>@item.RoomTypeName</strong>
+                        </td>
+
+                        <td>
+                            👥 @item.MaxGuests Guests
+                        </td>
+
+                        <td>
+                            ₹ @item.BasePrice
+                        </td>
+
+                        <td>
+
+                            @if (item.IsActive)
+                            {
+                                <span class="status active">
+                                    Active
+                                </span>
+                            }
+                            else
+                            {
+                                <span class="status inactive">
+                                    Inactive
+                                </span>
+                            }
+
+                        </td>
+
+                        <td>
+
+                            <div class="action-buttons">
+                                <a asp-action="Edit"
+                                       asp-route-id="@item.Id"
+                                       class="btn-action edit">
+                                    Edit
+                                </a>
+
+                                <a asp-action="Delete"
+                                       asp-route-id="@item.Id"
+                                       onclick="return confirm('Are you sure you want to delete this room type?')"
+                                       class="btn-action delete">
+                                    Delete
+                                </a>
+
+                            </div>
+
+                        </td>
+
+                    </tr>
+                }
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>

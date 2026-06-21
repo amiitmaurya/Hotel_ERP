@@ -1,0 +1,102 @@
+﻿@model Demo_Project.Models.Floor
+
+<link href="~/css/floormaster/edit.css" rel="stylesheet" />
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show">
+        @TempData["Success"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+}
+
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show">
+        @TempData["Error"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+}
+
+<div class="floor-container">
+
+    <div class="page-header">
+
+        <div>
+            <h2>✏️ Edit Floor</h2>
+            <p>Update floor information and availability status</p>
+        </div>
+
+    </div>
+
+    <div class="floor-card">
+
+        <form asp-action="Edit" method="post">
+
+            <input type="hidden" asp-for="Id" />
+
+            <div class="mb-4">
+
+                <label asp-for="FloorName" class="form-label">
+                    Floor Name
+                </label>
+
+                <input asp-for="FloorName"
+                       class="form-control custom-input"
+                       placeholder="Enter floor name" required />
+
+            @*     <span asp-validation-for="FloorName"
+                      class="text-danger"></span> *@
+
+            </div>
+
+            <div class="mb-4">
+
+                <label asp-for="FloorNumber" class="form-label">
+                    Floor Number
+                </label>
+
+                <input asp-for="FloorNumber"
+                       class="form-control custom-input"
+                       placeholder="Enter floor number" required />
+
+               @*  <span asp-validation-for="FloorNumber"
+                      class="text-danger"></span> *@
+
+            </div>
+
+            <div class="status-box">
+
+                <div class="form-check form-switch">
+
+                    <input asp-for="IsActive"
+                           class="form-check-input"
+                           role="switch" />
+
+                    <label asp-for="IsActive"
+                           class="form-check-label">
+                        Active Floor
+                    </label>
+
+                </div>
+
+            </div>
+
+            <div class="action-buttons">
+
+                <button type="submit"
+                        class="btn-update">
+                    Update Floor
+                </button>
+
+                <a asp-action="Index"
+                       class="btn-back">
+                    Back
+                </a>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>

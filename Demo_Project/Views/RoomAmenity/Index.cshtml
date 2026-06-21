@@ -1,0 +1,88 @@
+﻿@model IEnumerable<Demo_Project.Models.RoomAmenity>
+
+<link href="~/css/roomamenity/index.css" rel="stylesheet" />
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show">
+        @TempData["Success"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+}
+
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show">
+        @TempData["Error"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+}
+
+<div class="roomamenity-wrapper">
+
+    <div class="roomamenity-header">
+
+        <div>
+            <h2>🛏️ Room Amenities</h2>
+            <p>Manage amenities assigned to hotel rooms</p>
+        </div>
+
+        <a asp-action="Create"
+               class="btn-create">
+            + Add New
+        </a>
+
+    </div>
+
+    <div class="stats-box">
+        Total Assignments : @Model.Count()
+    </div>
+
+    <div class="table-responsive">
+
+        <table class="roomamenity-table">
+
+            <thead>
+                <tr>
+                    <th>Room Number</th>
+                    <th>Amenity</th>
+                    <th width="180">Actions</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+
+                        <td>
+                            <strong>@item.Room?.RoomNumber</strong>
+                        </td>
+
+                        <td>
+                            <span class="amenity-badge">
+                                @item.Amenity?.AmenityName
+                            </span>
+                        </td>
+
+                        <td>
+
+                            <a asp-action="Delete"
+                                   asp-route-roomId="@item.RoomId"
+                                   asp-route-amenityId="@item.AmenityId"
+                                   class="btn-action delete">
+                                Delete
+                            </a>
+
+                        </td>
+
+                    </tr>
+                }
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>

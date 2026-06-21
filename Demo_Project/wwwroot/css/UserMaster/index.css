@@ -1,0 +1,137 @@
+﻿.user-wrapper {
+    background: #fff;
+    padding: 30px;
+    border-radius: 25px;
+    box-shadow: 0 10px 30px rgba(0,0,0,.08);
+}
+
+.user-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+    .user-header h2 {
+        font-size: 34px;
+        font-weight: 700;
+        margin-bottom: 5px;
+    }
+
+    .user-header p {
+        color: #6c757d;
+        margin: 0;
+    }
+
+.btn-create {
+    background: #2fa36b;
+    color: #fff;
+    text-decoration: none;
+    padding: 12px 22px;
+    border-radius: 12px;
+    font-weight: 600;
+}
+
+    .btn-create:hover {
+        color: #fff;
+        opacity: .9;
+    }
+
+.stats-box {
+    display: inline-block;
+    background: #f5f7fb;
+    padding: 12px 20px;
+    border-radius: 12px;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.user-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+    .user-table thead {
+        background: #f5f7fb;
+    }
+
+    .user-table th {
+        padding: 18px;
+        font-weight: 700;
+        color: #444;
+    }
+
+    .user-table td {
+        padding: 18px;
+        border-top: 1px solid #eee;
+        vertical-align: middle;
+    }
+
+    .user-table tbody tr:hover {
+        background: #fafafa;
+    }
+
+.status {
+    padding: 8px 14px;
+    border-radius: 30px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.active {
+    background: #e8f8ee;
+    color: #198754;
+}
+
+.inactive {
+    background: #ffe5e5;
+    color: #dc3545;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 8px;
+}
+
+.btn-action {
+    text-decoration: none;
+    padding: 8px 14px;
+    border-radius: 10px;
+    color: white;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.edit {
+    background: #ffc107;
+    color: #212529;
+}
+
+.delete {
+    background: #dc3545;
+}
+
+.edit:hover {
+    color: #212529;
+}
+
+.delete:hover {
+    color: white;
+}
+
+.btn-action:hover {
+    opacity: .9;
+}
+
+@media(max-width:768px) {
+
+    .user-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .user-table {
+        min-width: 1000px;
+    }
+}

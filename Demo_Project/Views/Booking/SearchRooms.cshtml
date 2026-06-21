@@ -1,0 +1,272 @@
+﻿@model IEnumerable<Demo_Project.Models.Room>
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show">
+        @TempData["Success"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+}
+
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show">
+        @TempData["Error"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+}
+@{
+    ViewData["Title"] = "Search Rooms";
+}
+
+<link href="~/css/booking/searchroom.css" rel="stylesheet" />
+
+<div class="search-wrapper">
+
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade show mb-4">
+
+            @TempData["Error"]
+
+            <button type="button"
+                    class="btn-close"
+                    data-bs-dismiss="alert">
+            </button>
+
+        </div>
+    }
+
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show mb-4">
+
+            @TempData["Success"]
+
+            <button type="button"
+                    class="btn-close"
+                    data-bs-dismiss="alert">
+            </button>
+
+        </div>
+    }
+
+    <div class="search-card">
+
+        <div class="search-header">
+
+            <h2>Find Available Rooms</h2>
+
+            <p>
+                Select check-in and check-out dates to see available rooms.
+            </p>
+
+        </div>
+
+        <form id="searchForm"
+              asp-controller="Booking"
+              asp-action="SearchRooms"
+              method="post">
+
+            <div class="row g-3">
+
+                <div class="col-md-5">
+
+                    <label class="mb-2">
+                        Check In Date
+                    </label>
+
+                    <input type="date"
+                           id="checkIn"
+                           name="checkIn"
+                           value="@ViewBag.CheckIn"
+                           class="form-control custom-input"
+                           min="@DateTime.Today.ToString("yyyy-MM-dd")"
+                           required />
+
+                </div>
+
+                <div class="col-md-5">
+
+                    <label class="mb-2">
+                        Check Out Date
+                    </label>
+
+                    <input type="date"
+                           id="checkOut"
+                           name="checkOut"
+                           value="@ViewBag.CheckOut"
+                           class="form-control custom-input"
+                           required />
+
+                </div>
+
+                <div class="col-md-2 d-flex align-items-end">
+
+                    <button type="submit"
+                            class="search-btn">
+
+                        Check Availability
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+@if (Model != null && Model.Any())
+{
+    <div class="container-fluid mt-5">
+
+        <div class="room-heading">
+
+            <h2>Available Rooms</h2>
+
+            <span class="room-count">
+                @Model.Count() Rooms Found
+            </span>
+
+        </div>
+
+        <div class="row">
+
+            @foreach (var room in Model)
+            {
+                var image = room.RoomImages
+                .FirstOrDefault(x => x.IsPrimary)
+                ?? room.RoomImages.FirstOrDefault();
+
+                <div class="col-lg-4 col-md-6 mb-4">
+
+                    <div class="room-card">
+
+                        <a asp-controller="Booking"
+                               asp-action="BookRoom"
+                               asp-route-roomId="@room.Id"
+                               asp-route-checkInDate="@ViewBag.CheckIn"
+                               asp-route-checkOutDate="@ViewBag.CheckOut">
+
+                            <img src="@(image != null ? image.ImagePath : "/images/no-image.jpg")"
+                                 class="room-image" />
+
+                        </a>
+
+                        <div class="room-body">
+
+                            <div class="room-top">
+
+                                <div class="room-number">
+                                    Room @room.RoomNumber
+                                </div>
+
+                                <span class="status-badge">
+                                    @room.Status
+                                </span>
+
+                            </div>
+
+                            <div class="room-type">
+                                @room.RoomType?.RoomTypeName
+                            </div>
+
+                            <div class="room-desc">
+                                @room.Description
+                            </div>
+
+                            <div class="price-box">
+
+                                <div class="price-label">
+                                    Price Per Night
+                                </div>
+
+                                <p class="price">
+                                    ₹@room.PricePerNight
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                        <div class="room-footer">
+
+                            <a asp-controller="Booking"
+                                   asp-action="BookRoom"
+                                   asp-route-roomId="@room.Id"
+                                   asp-route-checkInDate="@ViewBag.CheckIn"
+                                   asp-route-checkOutDate="@ViewBag.CheckOut"
+                                   class="book-btn">
+
+                                BOOK NOW
+
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            }
+
+        </div>
+
+    </div>
+}
+
+<script>
+
+    document.addEventListener("DOMContentLoaded", function () {
+
+        let checkIn = document.getElementById("checkIn");
+        let checkOut = document.getElementById("checkOut");
+        let form = document.getElementById("searchForm");
+
+        if (checkIn.value) {
+
+            let checkInDate = new Date(checkIn.value);
+
+            checkInDate.setDate(checkInDate.getDate() + 1);
+
+            let minCheckout = checkInDate.toISOString().split('T')[0];
+
+            checkOut.min = minCheckout;
+        }
+
+        checkIn.addEventListener("change", function () {
+
+            let checkInDate = new Date(this.value);
+
+            checkInDate.setDate(checkInDate.getDate() + 1);
+
+            let minCheckout = checkInDate.toISOString().split('T')[0];
+
+            checkOut.min = minCheckout;
+
+            if (checkOut.value && checkOut.value < minCheckout) {
+                checkOut.value = "";
+            }
+        });
+
+        form.addEventListener("submit", function (e) {
+
+            if (!checkIn.value || !checkOut.value)
+                return;
+
+            let inDate = new Date(checkIn.value);
+            let outDate = new Date(checkOut.value);
+
+            if (outDate <= inDate) {
+
+                e.preventDefault();
+
+                alert("Check-Out date must be greater than Check-In date.");
+            }
+        });
+
+    });
+
+</script>

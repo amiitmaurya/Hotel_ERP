@@ -1,0 +1,75 @@
+﻿@model Demo_Project.Models.RoomAmenity
+
+<link href="~/css/roomamenity/delete.css" rel="stylesheet" />
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show">
+        @TempData["Success"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+}
+
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show">
+        @TempData["Error"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+}
+
+<div class="delete-container">
+
+    <div class="delete-card">
+
+        <div class="delete-icon">
+            🗑️
+        </div>
+
+        <h2>Delete Room Amenity</h2>
+
+        <p class="delete-message">
+            Are you sure you want to remove this amenity assignment?
+        </p>
+
+        <div class="detail-box">
+
+            <div class="detail-item">
+                <span>Room Number</span>
+                <h5>@Model.Room?.RoomNumber</h5>
+            </div>
+
+            <div class="detail-item">
+                <span>Amenity</span>
+                <h5>@Model.Amenity?.AmenityName</h5>
+            </div>
+
+        </div>
+
+        <div class="warning-box">
+            ⚠ This room will no longer have access to this amenity.
+        </div>
+
+        <form asp-action="DeleteConfirmed" method="post">
+
+            <input type="hidden" asp-for="RoomId" />
+            <input type="hidden" asp-for="AmenityId" />
+
+            <div class="action-buttons">
+
+                <button type="submit"
+                        class="btn-delete">
+                    Delete Assignment
+                </button>
+
+                <a asp-action="Index"
+                       class="btn-cancel">
+                    Cancel
+                </a>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>

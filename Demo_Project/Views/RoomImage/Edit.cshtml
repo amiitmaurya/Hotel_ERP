@@ -1,0 +1,146 @@
+﻿@model Demo_Project.Models.RoomImage
+
+<link href="~/css/roomimages/edit.css" rel="stylesheet" />
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show">
+        @TempData["Success"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+}
+
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show">
+        @TempData["Error"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+}
+
+<div class="roomimage-container">
+
+    <div class="page-header">
+
+        <div>
+            <h2>🖼️ Edit Room Image</h2>
+            <p>Update room gallery image and primary status</p>
+        </div>
+
+    </div>
+
+    <div class="roomimage-card">
+
+        <form asp-action="Edit"
+              method="post"
+              enctype="multipart/form-data">
+
+            <input asp-for="Id" type="hidden" />
+            <input asp-for="RoomId" type="hidden" />
+            <input asp-for="ImagePath" type="hidden" />
+
+            <div class="image-section">
+
+                <div class="image-box">
+
+                    <h5>Current Image</h5>
+
+                    <img src="@Model.ImagePath"
+                         class="preview-image" />
+
+                </div>
+
+                <div class="image-box">
+
+                    <h5>New Image Preview</h5>
+
+                    <img id="newImagePreview"
+                         class="preview-image"
+                         style="display:none;"  />
+
+                    <div id="previewPlaceholder">
+                        📷 Select an image to preview
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="mb-4">
+
+                <label class="form-label">
+                    Change Image
+                </label>
+
+                <input type="file"
+                       name="NewImage"
+                       id="NewImage"
+                       class="form-control custom-input"
+                       accept="image/*" />
+
+            </div>
+
+            <div class="primary-box">
+
+                <div class="form-check form-switch">
+
+                    <input asp-for="IsPrimary"
+                           class="form-check-input"
+                           role="switch" />
+
+                    <label asp-for="IsPrimary"
+                           class="form-check-label">
+                        Set As Primary Image
+                    </label>
+
+                </div>
+
+            </div>
+
+            <div class="action-buttons">
+
+                <button type="submit"
+                        class="btn-update">
+                    Update Image
+                </button>
+
+                <a asp-action="Index"
+                       asp-route-roomId="@Model.RoomId"
+                       class="btn-back">
+                    Cancel
+                </a>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+<script>
+    document.getElementById('NewImage').addEventListener('change', function () {
+
+        const file = this.files[0];
+
+        if (file) {
+
+            const reader = new FileReader();
+
+            reader.onload = function (e) {
+
+                const preview =
+                    document.getElementById('newImagePreview');
+
+                const placeholder =
+                    document.getElementById('previewPlaceholder');
+
+                preview.src = e.target.result;
+                preview.style.display = 'block';
+
+                placeholder.style.display = 'none';
+            };
+
+            reader.readAsDataURL(file);
+        }
+    });
+</script>

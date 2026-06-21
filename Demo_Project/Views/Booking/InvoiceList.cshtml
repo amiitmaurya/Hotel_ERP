@@ -1,0 +1,131 @@
+﻿@model List<Demo_Project.Models.Booking>
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show">
+        @TempData["Success"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+}
+
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show">
+        @TempData["Error"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+}
+@{
+    ViewData["Title"] = "All Invoices";
+}
+
+<link rel="stylesheet" href="~/css/Booking/InvoiceList.css" />
+
+<div class="invoice-page">
+
+    <div class="invoice-header-box">
+
+        <div>
+            <h2>Invoice Management</h2>
+            <p>View and manage all hotel invoices</p>
+        </div>
+
+        <div class="invoice-count">
+            Total Invoices : @Model.Count
+        </div>
+
+    </div>
+
+    <div class="invoice-table-card">
+
+        <div class="table-responsive">
+
+            <table class="table custom-table align-middle">
+
+                <thead>
+
+                    <tr>
+                        <th>Booking No</th>
+                        <th>Customer</th>
+                        <th>Room</th>
+                        <th>Check In</th>
+                        <th>Check Out</th>
+                        <th>Total Amount</th>
+                        <th>Status</th>
+                        <th>Invoice</th>
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+
+                            <td>
+                                <strong>#@item.BookingNumber</strong>
+                            </td>
+
+                            <td>
+                                @item.Customer?.FullName
+                            </td>
+
+                            <td>
+                                Room @item.Room?.RoomNumber
+                            </td>
+
+                            <td>
+                                @item.CheckInDate.ToString("dd MMM yyyy")
+                            </td>
+
+                            <td>
+                                @item.CheckOutDate.ToString("dd MMM yyyy")
+                            </td>
+
+                            <td>
+                                <strong>
+                                    ₹@item.TotalAmount
+                                </strong>
+                            </td>
+
+                            <td>
+
+                                @if (item.Status.ToString() == "Cancelled")
+                                {
+                                    <span class="status-cancelled">
+                                        Cancelled
+                                    </span>
+                                }
+                                else
+                                {
+                                    <span class="status-paid">
+                                        Paid
+                                    </span>
+                                }
+
+                            </td>
+
+                            <td>
+
+                                <a asp-action="Invoice"
+                                       asp-route-id="@item.Id"
+                                       class="view-btn">
+
+                                    View Invoice
+
+                                </a>
+
+                            </td>
+
+                        </tr>
+                    }
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>

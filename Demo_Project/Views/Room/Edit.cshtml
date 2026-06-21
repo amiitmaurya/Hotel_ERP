@@ -1,0 +1,187 @@
+﻿@model Demo_Project.Models.Room
+@using Demo_Project.Models.Enums
+
+<link href="~/css/roommaster/edit.css" rel="stylesheet" />
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show">
+        @TempData["Success"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+}
+
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show">
+        @TempData["Error"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+}
+
+<div class="room-container">
+
+    <div class="page-header">
+
+        <div>
+            <h2>✏️ Edit Room</h2>
+            <p>Update room information, pricing and availability</p>
+        </div>
+
+    </div>
+
+    <div class="room-card">
+
+        <form asp-action="Edit" method="post">
+
+            <input type="hidden" asp-for="Id" />
+
+            <div class="row">
+
+                <div class="col-md-6 mb-3">
+
+                    <label class="form-label">
+                        Room Number
+                    </label>
+
+                    <input asp-for="RoomNumber"
+                           class="form-control custom-input"
+                           placeholder="Enter room number" required />
+
+                </div>
+
+                <div class="col-md-6 mb-3">
+
+                    <label class="form-label">
+                        Floor
+                    </label>
+
+                    <select asp-for="FloorId"
+                            asp-items="ViewBag.FloorId"
+                            class="form-select custom-input" required>
+                    </select>
+
+                </div>
+                <br />
+                <div class="row">
+                <div class="col-md-6 mb-3">
+
+                    <label class="form-label">
+                        Room Type
+                    </label>
+
+                    <select asp-for="RoomTypeId"
+                            asp-items="ViewBag.RoomTypeId"
+                                class="form-select custom-input" required
+                            id="RoomTypeId">
+                    </select>
+
+                </div>
+
+                <div class="col-md-6 mb-3">
+
+                    <label class="form-label">
+                        Price Per Night
+                    </label>
+
+                    <input asp-for="PricePerNight"
+                           id="PricePerNight"
+                           readonly
+                           class="form-control custom-input price-box" />
+
+                </div>
+                </div>
+                <div class="col-12 mb-3">
+
+                    <label class="form-label">
+                        Description
+                    </label>
+
+                    <textarea asp-for="Description"
+                              rows="4"
+                              class="form-control custom-input"
+                              placeholder="Enter room description" required></textarea>
+
+                </div>
+
+                <div class="mb-3">
+
+                    <label class="form-label">
+                        Room Status
+                    </label>
+
+                    <select asp-for="Status"
+                            asp-items="Html.GetEnumSelectList<RoomStatus>()"
+                            class="form-select custom-input" required>
+                    </select>
+
+                </div>
+
+            </div>
+
+            <div class="status-box">
+
+                <div class="form-check form-switch">
+
+                    <input asp-for="IsActive"
+                           class="form-check-input"
+                           role="switch" />
+
+                    <label asp-for="IsActive"
+                           class="form-check-label">
+                        Active Room
+                    </label>
+
+                </div>
+
+            </div>
+
+            <div class="action-buttons">
+
+                <button type="submit"
+                        class="btn-update">
+                    Update Room
+                </button>
+
+                <a asp-action="Index"
+                       class="btn-back">
+                    Back
+                </a>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+
+    $("#RoomTypeId").change(function () {
+
+    var roomTypeId = $(this).val();
+
+    if (roomTypeId) {
+
+    $.ajax({
+    url: '/Room/GetRoomTypePrice',
+    type: 'GET',
+    data: { roomTypeId: roomTypeId },
+
+    success: function (data) {
+    $("#PricePerNight").val(data);
+    },
+
+    error: function () {
+    alert("Unable to fetch room price.");
+    }
+    });
+    }
+
+    });
+
+    });
+</script>

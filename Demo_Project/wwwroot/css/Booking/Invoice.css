@@ -1,0 +1,122 @@
+﻿body {
+    background: #f5f7f9;
+}
+
+.invoice-card {
+    max-width: 1400px;
+    margin: 30px auto;
+    border: none;
+    border-radius: 24px;
+    overflow: hidden;
+    background: #fff;
+    box-shadow: 0 12px 35px rgba(0,0,0,.08);
+}
+
+.invoice-header {
+    background: linear-gradient(135deg,#0f172a,#1f7a53);
+    color: white;
+    padding: 35px;
+}
+
+.hotel-name {
+    font-size: 34px;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.hotel-location {
+    opacity: .9;
+}
+
+.header-divider {
+    border-color: rgba(255,255,255,.25);
+}
+
+.info-card {
+    background: white;
+    padding: 25px;
+    border-radius: 18px;
+    height: 100%;
+    border: 1px solid #edf0f2;
+    box-shadow: 0 5px 18px rgba(0,0,0,.05);
+}
+
+    .info-card h5 {
+        color: #1f7a53;
+        font-weight: 700;
+        margin-bottom: 15px;
+    }
+
+.section-title {
+    color: #111827;
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 18px;
+}
+
+.table {
+    margin-bottom: 0;
+}
+
+    .table th {
+        background: #f8fafc;
+        width: 35%;
+    }
+
+.bill-table {
+    overflow: hidden;
+    border-radius: 16px;
+}
+
+    .bill-table thead th {
+        background: #1f7a53 !important;
+        color: white;
+        border: none;
+    }
+
+    .bill-table td,
+    .bill-table th {
+        padding: 15px;
+    }
+
+.grand-total {
+    background: #eefaf3;
+    color: #1f7a53;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+    .grand-total td {
+        color: #1f7a53 !important;
+    }
+
+.text-success {
+    color: #1f7a53 !important;
+}
+
+.no-print {
+    background: #1f7a53;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 12px;
+}
+
+    .no-print:hover {
+        background: #166346;
+    }
+
+@media print {
+
+    .no-print {
+        display: none !important;
+    }
+
+    body {
+        background: white;
+    }
+
+    .invoice-card {
+        box-shadow: none;
+        margin: 0;
+    }
+}

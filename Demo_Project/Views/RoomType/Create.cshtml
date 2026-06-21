@@ -1,0 +1,130 @@
+﻿@model Demo_Project.Models.RoomType
+
+
+<link href="~/css/roomtypemaster/create.css" rel="stylesheet" />
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show">
+        @TempData["Success"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+}
+
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show">
+        @TempData["Error"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+}
+
+<div class="roomtype-container">
+
+    <div class="page-header">
+
+        <div>
+
+            <h2>🏨 Create Room Type</h2>
+            <p>Add a new room category for your hotel</p>
+        </div>
+
+    </div>
+
+    <div class="roomtype-card">
+
+        <form asp-action="Create" method="post">
+
+            <div class="mb-4">
+
+                <label asp-for="RoomTypeName"
+                       class="form-label">
+                    Room Type Name
+                </label>
+
+                <input asp-for="RoomTypeName"
+                       class="form-control custom-input"
+                       placeholder="e.g. Deluxe Room" required />
+
+               @*  <span asp-validation-for="RoomTypeName"
+                      class="text-danger"></span> *@
+
+            </div>
+
+            <div class="mb-4">
+
+                <label asp-for="Description"
+                       class="form-label">
+                    Description
+                </label>
+
+                <textarea asp-for="Description"
+                          rows="4"
+                          class="form-control custom-input"
+                          placeholder="Enter room type description" required></textarea>
+
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-6 mb-4">
+
+                    <label asp-for="MaxGuests"
+                           class="form-label">
+                        Maximum Guests
+                    </label>
+
+                    <input asp-for="MaxGuests"
+                           class="form-control custom-input" required />
+
+                </div>
+
+                <div class="col-md-6 mb-4">
+
+                    <label asp-for="BasePrice"
+                           class="form-label">
+                        Base Price (₹)
+                    </label>
+
+                    <input asp-for="BasePrice"
+                           class="form-control custom-input" required />
+
+                </div>
+
+            </div>
+
+            <div class="status-box">
+
+                <div class="form-check form-switch">
+
+                    <input asp-for="IsActive"
+                           class="form-check-input"
+                           role="switch" />
+
+                    <label asp-for="IsActive"
+                           class="form-check-label">
+                        Active Room Type
+                    </label>
+
+                </div>
+
+            </div>
+
+            <div class="action-buttons">
+
+                <button type="submit"
+                        class="btn-save">
+                    Save Room Type
+                </button>
+
+                <a asp-action="Index"
+                       class="btn-back">
+                    Back
+                </a>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>

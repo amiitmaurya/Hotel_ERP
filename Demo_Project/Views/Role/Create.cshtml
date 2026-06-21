@@ -1,0 +1,125 @@
+﻿@model Demo_Project.Models.Role
+
+
+<link href="~/css/rolemaster/create.css" rel="stylesheet" />
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show">
+        @TempData["Success"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+}
+
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show">
+        @TempData["Error"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+}
+
+<div class="role-container">
+
+    <div class="page-header">
+
+        <div>
+
+            <h2>👤 Create Role</h2>
+            <p>Create a new role and assign system permissions</p>
+        </div>
+
+    </div>
+
+    <div class="role-card">
+
+        <form asp-action="Create" method="post">
+
+            <div class="mb-4">
+
+                <label class="form-label">
+                    Role Name
+                </label>
+
+                <input asp-for="RoleName"
+                       class="form-control custom-input"
+                       placeholder="Enter role name" required />
+
+            </div>
+
+            <div class="mb-4">
+
+                <label class="form-label">
+                    Description
+                </label>
+
+                <textarea asp-for="Description"
+                          rows="4"
+                          class="form-control custom-input"
+                          placeholder="Enter role description" required></textarea>
+
+            </div>
+
+            <div class="permission-card" required>
+
+                <h4>🔐 Permissions</h4>
+
+                <div class="permission-grid">
+
+                    <div class="permission-item">
+                        <input asp-for="DashboardPermission" />
+                        <label>Dashboard</label>
+                    </div>
+
+                    <div class="permission-item">
+                        <input asp-for="BookingPermission" />
+                        <label>Booking</label>
+                    </div>
+
+                    <div class="permission-item">
+                        <input asp-for="InvoicePermission" />
+                        <label>Invoice</label>
+                    </div>
+
+                    <div class="permission-item">
+                        <input asp-for="UserPermission" />
+                        <label>User Master</label>
+                    </div>
+
+                    <div class="permission-item">
+                        <input asp-for="RoomPermission" />
+                        <label>Room Master</label>
+                    </div>
+
+                    <div class="permission-item">
+                        <input asp-for="ReportPermission" />
+                        <label>Reports</label>
+                    </div>
+
+                    <div class="permission-item">
+                        <input asp-for="SettingPermission" />
+                        <label>Settings</label>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="action-buttons">
+
+                <button type="submit"
+                        class="btn-save">
+                    Save Role
+                </button>
+
+                <a asp-action="Index"
+                       class="btn-back">
+                    Back
+                </a>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>

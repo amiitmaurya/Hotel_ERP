@@ -1,0 +1,104 @@
+﻿.roomimage-container {
+    background: #fff;
+    padding: 30px;
+    border-radius: 25px;
+    box-shadow: 0 10px 30px rgba(0,0,0,.08);
+}
+
+.page-header {
+    margin-bottom: 25px;
+}
+
+    .page-header h2 {
+        font-size: 34px;
+        font-weight: 700;
+        margin-bottom: 5px;
+    }
+
+    .page-header p {
+        color: #6c757d;
+        margin: 0;
+    }
+
+.roomimage-card {
+    background: #fafafa;
+    padding: 25px;
+    border-radius: 20px;
+}
+
+.form-label {
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.custom-input {
+    min-height: 50px;
+    border-radius: 12px;
+}
+
+.preview-card {
+    height: 280px;
+    border: 2px dashed #dcdcdc;
+    border-radius: 15px;
+    background: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    margin-bottom: 25px;
+    position: relative;
+}
+
+.preview-image {
+    max-width: 100%;
+    max-height: 100%;
+    display: none;
+}
+
+#placeholder {
+    color: #999;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.primary-box {
+    background: white;
+    border: 1px solid #eee;
+    border-radius: 15px;
+    padding: 18px;
+    margin-bottom: 25px;
+}
+
+.form-switch .form-check-input {
+    width: 3rem;
+    height: 1.5rem;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 12px;
+}
+
+.btn-upload {
+    background: #2fa36b;
+    color: white;
+    border: none;
+    padding: 12px 28px;
+    border-radius: 12px;
+    font-weight: 600;
+}
+
+.btn-back {
+    background: #6c757d;
+    color: white;
+    text-decoration: none;
+    padding: 12px 28px;
+    border-radius: 12px;
+    font-weight: 600;
+}
+
+    .btn-upload:hover,
+    .btn-back:hover {
+        opacity: .9;
+        color: white;
+    }

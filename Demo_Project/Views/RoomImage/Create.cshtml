@@ -1,0 +1,148 @@
+﻿@model Demo_Project.Models.RoomImageVM
+
+
+<link href="~/css/roomimages/create.css" rel="stylesheet" />
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show">
+        @TempData["Success"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+}
+
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show">
+        @TempData["Error"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+}
+<div class="roomimage-container">
+
+    <div class="page-header">
+
+        <div>
+            <h2>📸 Upload Room Image</h2>
+            <p>Manage room gallery and showcase room photos</p>
+        </div>
+
+    </div>
+
+    <div class="roomimage-card">
+
+        <form asp-action="Create"
+              method="post"
+              enctype="multipart/form-data">
+
+            <div class="mb-4">
+
+                <label class="form-label">
+                    Room Number
+                </label>
+
+                <select asp-for="RoomId"
+                        asp-items="Model.Rooms"
+                        class="form-select custom-input" required>
+
+                    <option value="">
+                        -- Select Room --
+                    </option>
+
+                </select>
+
+                <span asp-validation-for="RoomId"
+                      class="text-danger"></span>
+
+            </div>
+
+            <div class="mb-4">
+
+                <label class="form-label">
+                    Upload Image
+                </label>
+
+                <input asp-for="ImageFile"
+                       type="file"
+                       accept="image/*"
+                       class="form-control custom-input"
+                       id="ImageFile" required />
+
+               
+
+            </div>
+
+            <div class="preview-card">
+
+                <img id="imgPreview"
+                     src="#"
+                     alt="Preview"
+                     class="preview-image" />
+
+                <div id="placeholder">
+                    📷 Image Preview
+                </div>
+
+            </div>
+
+            <div class="primary-box">
+
+                <div class="form-check form-switch">
+
+                    <input asp-for="IsPrimary"
+                           class="form-check-input"
+                           role="switch" />
+
+                    <label asp-for="IsPrimary"
+                           class="form-check-label">
+                        Set as Primary Image
+                    </label>
+
+                </div>
+
+            </div>
+
+            <div class="action-buttons">
+
+                <button type="submit"
+                        class="btn-upload">
+                    Upload Image
+                </button>
+
+                <a asp-action="Index"
+                       class="btn-back">
+                    Back
+                </a>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+<script>
+    document.getElementById('ImageFile').addEventListener('change', function () {
+
+        const file = this.files[0];
+
+        if (file) {
+
+            const reader = new FileReader();
+
+            reader.onload = function (e) {
+
+                const preview = document.getElementById('imgPreview');
+                const placeholder = document.getElementById('placeholder');
+
+                preview.src = e.target.result;
+                preview.style.display = 'block';
+
+                placeholder.style.display = 'none';
+            };
+
+            reader.readAsDataURL(file);
+        }
+
+    });
+</script>

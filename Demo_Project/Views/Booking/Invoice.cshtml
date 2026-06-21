@@ -1,0 +1,253 @@
+﻿@model Demo_Project.Models.Booking
+@using Demo_Project.Models.Enums
+<link href="~/css/booking/invoice.css" rel="stylesheet" />
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show">
+        @TempData["Success"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+}
+
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show">
+        @TempData["Error"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+}
+@{
+    ViewData["Title"] = "Invoice";
+
+    decimal gst = Model.TotalAmount * 12 / 100;
+    decimal grandTotal = Model.TotalAmount + gst;
+}
+
+<div class="card invoice-card shadow-lg">
+
+    <!-- Header -->
+    <div class="invoice-header">
+
+        <div class="d-flex justify-content-between align-items-center flex-wrap">
+
+            <div>
+                <h1 class="hotel-name">
+                    🏨 Royal Place Hotel
+                </h1>
+
+                <p class="hotel-location mb-0">
+                    Lucknow, Uttar Pradesh
+                </p>
+            </div>
+
+            <div class="text-end">
+
+                <h3 class="mb-3">
+                    INVOICE
+                </h3>
+
+                @if (Model.Status == BookingStatus.Cancelled)
+                {
+                    <span class="badge bg-danger fs-6 px-3 py-2">
+                        CANCELLED
+                    </span>
+                }
+                else
+                {
+                    <span class="badge bg-success fs-6 px-3 py-2">
+                        PAID
+                    </span>
+                }
+
+            </div>
+
+        </div>
+
+        <hr class="header-divider" />
+
+        <div class="row mt-3">
+
+            <div class="col-md-4">
+                <p><strong>Invoice No :</strong> INV-@Model.BookingNumber</p>
+                <p><strong>Invoice Date :</strong> @DateTime.Now.ToString("dd-MMM-yyyy")</p>
+            </div>
+
+            <div class="col-md-4">
+                <p><strong>Booking No :</strong> @Model.BookingNumber</p>
+                <p><strong>Room No :</strong> @Model.Room?.RoomNumber</p>
+            </div>
+
+            <div class="col-md-4 text-md-end">
+                <p><strong>Check In :</strong> @Model.CheckInDate.ToString("dd-MMM-yyyy")</p>
+                <p><strong>Check Out :</strong> @Model.CheckOutDate.ToString("dd-MMM-yyyy")</p>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- BODY -->
+    <div class="card-body p-4">
+
+        <!-- Guest + Booking Info -->
+
+        <div class="row g-4">
+
+            <div class="col-md-6">
+
+                <div class="info-card">
+
+                    <h5>Guest Information</h5>
+
+                    <p><strong>Name :</strong> @Model.Customer?.FullName</p>
+                    <p><strong>Mobile :</strong> @Model.Customer?.Mobile</p>
+                    <p><strong>Email :</strong> @Model.Customer?.Email</p>
+
+                </div>
+
+            </div>
+
+            <div class="col-md-6">
+
+                <div class="info-card">
+
+                    <h5>Booking Information</h5>
+
+                    <p><strong>Status :</strong> @Model.Status</p>
+                    <p><strong>Adults :</strong> @Model.Adults</p>
+                    <p><strong>Children :</strong> @Model.Children</p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Stay Details -->
+
+        <div class="mt-5">
+
+            <h4 class="section-title">
+                Stay Details
+            </h4>
+
+            <table class="table table-bordered">
+
+                <tr>
+                    <th>Room Number</th>
+                    <td>@Model.Room?.RoomNumber</td>
+                </tr>
+
+                <tr>
+                    <th>Room Type</th>
+                    <td>@Model.Room?.RoomType?.RoomTypeName</td>
+                </tr>
+
+                <tr>
+                    <th>Check In</th>
+                    <td>@Model.CheckInDate.ToString("dd-MMM-yyyy")</td>
+                </tr>
+
+                <tr>
+                    <th>Check Out</th>
+                    <td>@Model.CheckOutDate.ToString("dd-MMM-yyyy")</td>
+                </tr>
+
+                <tr>
+                    <th>Total Nights</th>
+                    <td>@Model.TotalNights</td>
+                </tr>
+
+            </table>
+
+        </div>
+
+        <!-- Billing Summary -->
+
+        <div class="mt-5">
+
+            <h4 class="section-title">
+                Billing Summary
+            </h4>
+
+            <table class="table table-bordered bill-table">
+
+                <thead>
+                    <tr>
+                        <th>Description</th>
+                        <th class="text-end">Amount</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    <tr>
+                        <td>
+                            Room Rent
+                            (@Model.PricePerNight × @Model.TotalNights)
+                        </td>
+
+                        <td class="text-end">
+                            ₹ @Model.TotalAmount
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>GST (12%)</td>
+
+                        <td class="text-end">
+                            ₹ @(Model.TotalAmount * 12 / 100)
+                        </td>
+                    </tr>
+
+                    <tr class="grand-total">
+
+                        <td>
+                            Grand Total
+                        </td>
+
+                        <td class="text-end">
+                            ₹ @(Model.TotalAmount + (Model.TotalAmount * 12 / 100))
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+        <!-- Footer -->
+
+        <div class="row mt-5">
+
+           @*  <div class="col-6">
+                <hr />
+                <strong>Guest Signature</strong>
+            </div>
+
+            <div class="col-6 text-end">
+                <hr />
+                <strong>Authorized Signature</strong>
+            </div> *@
+
+        </div>
+
+        <div class="text-center mt-5">
+
+            <h5 class="text-success">
+                Thank You For Staying With Us
+            </h5>
+            <br />
+            <button class="btn btn-primary no-print"
+                    onclick="window.print()">
+                Print Invoice
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+

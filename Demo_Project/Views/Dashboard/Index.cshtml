@@ -1,0 +1,158 @@
+﻿@model Demo_Project.Models.DashboardVM
+
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<link href="~/css/webstyle/dashboard.css" rel="stylesheet" />
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show">
+        @TempData["Success"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+}
+
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show">
+        @TempData["Error"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+}
+
+
+<div class="dashboard-container">
+
+    <!-- Header -->
+    <div class="dashboard-header">
+
+        <div>
+            <h2>Dashboard</h2>
+            <p>Hotel Management Overview</p>
+        </div>
+
+        <div class="header-actions">
+           
+            <a asp-controller="Booking"
+                   asp-action="SearchRooms"
+                   class="btn-reservation">
+                + New Reservation
+            </a>
+        </div>
+
+    </div>
+
+    <!-- Search Section -->
+    <div class="dashboard-card mb-4">
+
+        <form method="get">
+
+            <div class="row g-3 align-items-end">
+
+                <div class="col-md-4">
+                    <label>Check In Date</label>
+                    <input type="date"
+                           name="checkInDate"
+                           value="@Model.CheckInDate?.ToString("yyyy-MM-dd")"
+                           class="form-control custom-input" />
+                </div>
+
+                <div class="col-md-4">
+                    <label>Check Out Date</label>
+                    <input type="date"
+                           name="checkOutDate"
+                           value="@Model.CheckOutDate?.ToString("yyyy-MM-dd")"
+                           class="form-control custom-input" />
+                </div>
+
+                <div class="col-md-4">
+                    <button type="submit" class="search-btn">
+                        Search
+                    </button>
+                </div>
+
+            </div>
+
+        </form>
+
+    </div>
+
+    <!-- Stats Cards -->
+    <div class="row g-4">
+
+        <div class="col-lg-3 col-md-6">
+            <div class="stats-card">
+                <span>Total Rooms</span>
+                <h2>@Model.TotalRooms</h2>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6">
+            <div class="stats-card">
+                <span>Available Rooms</span>
+                <h2>@Model.AvailableRooms</h2>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6">
+            <div class="stats-card">
+                <span>Maintenance Rooms</span>
+                <h2>@Model.Maintenance</h2>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6">
+            <div class="stats-card">
+                <span>Reserved Rooms</span>
+                <h2>@Model.ReservedRooms</h2>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Bottom Cards -->
+    <div class="row g-4 mt-1">
+
+        <div class="col-lg-6">
+
+            <div class="large-card">
+
+                <div class="card-top">
+                    <h4>Today's CheckIns</h4>
+                    <span class="badge-green">
+                        @Model.TodayCheckIns Guests
+                    </span>
+                </div>
+
+                <div class="big-number">
+
+                    @Model.TodayCheckOuts 
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-lg-6">
+
+            <div class="large-card">
+
+                <div class="card-top">
+                    <h4>Today's CheckOuts</h4>
+                    <span class="badge-red">
+                        @Model.TodayCheckOuts Guests
+                    </span>
+                </div>
+
+                <div class="big-number">
+                    @Model.TodayCheckOuts
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

@@ -1,0 +1,203 @@
+﻿@using Microsoft.AspNetCore.Mvc.Rendering
+
+@{
+    Layout = null;
+    ViewData["Title"] = "Royal Place Booking";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    ```
+    <title>Royal Place Booking</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+          rel="stylesheet" />
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+          rel="stylesheet" />
+
+    <link href="~/css/account/login.css" rel="stylesheet" />
+
+</head>
+
+<body>
+
+    
+    <body>
+
+        <body>
+
+            ```
+            <div class="main-card">
+
+                <div class="logo">
+
+                    <i class="bi bi-buildings-fill"></i>
+
+                    <h1>Royal Place</h1>
+
+                    <p>Luxury Hotel Management System</p>
+
+                </div>
+
+                <ul class="nav nav-pills nav-fill mb-4">
+
+                    <li class="nav-item">
+                        <button class="nav-link active"
+                                data-bs-toggle="pill"
+                                data-bs-target="#loginTab">
+                            Login
+                        </button>
+                    </li>
+
+                    <li class="nav-item">
+                        <button class="nav-link"
+                                data-bs-toggle="pill"
+                                data-bs-target="#registerTab">
+                            Create Account
+                        </button>
+                    </li>
+
+                </ul>
+
+                <div class="tab-content">
+
+                    <!-- LOGIN -->
+
+                    <div class="tab-pane fade show active"
+                         id="loginTab">
+
+                        <h3 class="title">
+                            Welcome Back
+                        </h3>
+
+                        <form asp-action="Login"
+                              method="post">
+
+                            <input name="UserName"
+                                   class="form-control"
+                                   placeholder="Username" />
+
+                            <div class="input-group mb-3">
+                                <input name="Password"
+                                       type="password"
+                                       class="form-control"
+                                       id="loginPassword"
+                                       placeholder="Password" />
+
+                                <button type="button"
+                                        class="btn btn-outline-info"
+                                        onclick="togglePassword('loginPassword', this)">
+                                    <i class="bi bi-eye"></i>
+                                </button>
+                            </div>
+
+                            <button type="submit"
+                                    class="btn btn-login">
+                                Login
+                            </button>
+
+                        </form>
+
+                        @if (ViewBag.LoginError != null)
+                        {
+                            <div class="alert alert-danger mt-3">
+                                @ViewBag.LoginError
+                            </div>
+                        }
+
+                    </div>
+
+                    <!-- REGISTER -->
+
+                    <div class="tab-pane fade"
+                         id="registerTab">
+
+                        <h3 class="title">
+                            Create Account
+                        </h3>
+
+                        <form asp-action="Register"
+                              method="post">
+
+                            <input name="FullName"
+                                   class="form-control"
+                                   placeholder="Full Name" />
+
+                            <input name="Email"
+                                   class="form-control"
+                                   placeholder="Email Address" />
+
+                            <input name="Mobile"
+                                   class="form-control"
+                                   placeholder="Mobile Number" />
+
+                            <input name="UserName"
+                                   class="form-control"
+                                   placeholder="Username" />
+
+                            <div class="input-group mb-3">
+                                <input name="Password"
+                                       type="password"
+                                       class="form-control"
+                                       id="registerPassword"
+                                       placeholder="Password" />
+
+                                <button type="button"
+                                        class="btn btn-outline-info"
+                                        onclick="togglePassword('registerPassword', this)">
+                                    <i class="bi bi-eye"></i>
+                                </button>
+                            </div>
+
+                        
+
+                            <button type="submit"
+                                    class="btn btn-register">
+                                Create Account
+                            </button>
+
+                        </form>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <script>
+                            function togglePassword(inputId, btn) {
+
+                                const input = document.getElementById(inputId);
+                                const icon = btn.querySelector("i");
+
+                                if (input.type === "password") {
+                                    input.type = "text";
+                                    icon.classList.remove("bi-eye");
+                                    icon.classList.add("bi-eye-slash");
+                                }
+                                else {
+                                    input.type = "password";
+                                    icon.classList.remove("bi-eye-slash");
+                                    icon.classList.add("bi-eye");
+                                }
+                            }
+            </script>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+            ```
+
+        </body>
+
+      
+
+    </body>
+
+   
+
+</body>
+</html>

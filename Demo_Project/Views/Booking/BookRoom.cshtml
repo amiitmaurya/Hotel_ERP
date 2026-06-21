@@ -1,0 +1,281 @@
+﻿@model Demo_Project.Models.BookingVM
+@{
+    ViewData["Title"] = "Book Room";
+}
+
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show">
+        @TempData["Success"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+}
+
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show">
+        @TempData["Error"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+}
+<link href="~/css/booking/booking.css" rel="stylesheet" />
+
+
+
+     <form asp-action="ConfirmBooking"
+          method="post"
+          enctype="multipart/form-data">
+
+    <div class="row g-4 align-items-stretch">
+        <input asp-for="RoomId" type="hidden" />
+        <input asp-for="CheckInDate" type="hidden" />
+        <input asp-for="CheckOutDate" type="hidden" />
+
+    <!-- CONTACT DETAILS -->
+
+    <div class="col-lg-4">
+
+        <div class="booking-card">
+
+            <div class="card-title-box">
+                <h4>Contact Details</h4>
+            </div>
+
+            <div class="card-scroll">
+
+                <div class="mb-3">
+                    <label>Full Name</label>
+                    <input asp-for="FullName"
+                           class="form-control"
+                           required />
+                </div>
+
+                <div class="mb-3">
+                    <label>Mobile</label>
+                    <input asp-for="Mobile"
+                           class="form-control"
+                           required />
+                </div>
+
+                <div class="mb-3">
+                    <label>Email</label>
+                    <input asp-for="Email"
+                               class="form-control" required />
+                </div>
+
+                <div class="mb-3">
+                    <label>Gender</label>
+                    <select asp-for="Gender"
+                            class="form-control" required
+                    >
+                    
+                        <option value="">Select ▼ </option>
+                        <option>Male</option>
+                        <option>Female</option>
+
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label>Date Of Birth</label>
+                    <input asp-for="DateOfBirth"
+                           type="date"
+                           class="form-control"
+                           required />
+                </div>
+
+                <div class="mb-3">
+                    <label>Adults</label>
+                    <input asp-for="Adults"
+                           class="form-control" />
+                </div>
+
+                <div class="mb-3">
+                    <label>Children</label>
+                    <input asp-for="Children"
+                           class="form-control" />
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ADDRESS & IDENTITY -->
+
+    <div class="col-lg-4">
+
+        <div class="booking-card">
+
+            <div class="card-title-box">
+                <h4>Address & Identity</h4>
+            </div>
+
+            <div class="card-scroll">
+
+                <div class="mb-3">
+                    <label>Address</label>
+                    <textarea asp-for="Address"
+                                  class="form-control" required></textarea>
+                </div>
+
+                <div class="mb-3">
+                    <label>City</label>
+                    <input asp-for="City"
+                               class="form-control" required />
+                </div>
+
+                <div class="mb-3">
+                    <label>State</label>
+                    <input asp-for="State"
+                               class="form-control" required />
+                </div>
+
+                <div class="mb-3">
+                    <label>Country</label>
+                    <input asp-for="Country"
+                               class="form-control" required />
+                </div>
+
+                <div class="mb-3">
+                    <label>Pincode</label>
+                    <input asp-for="Pincode"
+                               class="form-control" required />
+                </div>
+
+                <div class="mb-3">
+                    <label>ID Type</label>
+                    <input asp-for="IdentityType"
+                               class="form-control" required />
+                </div>
+
+                <div class="mb-3">
+                    <label>ID Number</label>
+                    <input asp-for="IdentityNumber"
+                               class="form-control" required />
+                </div>
+
+                <div class="mb-3">
+                    <label>Identity Proof Image</label>
+
+                    <input asp-for="IdentityImage"
+                           type="file"
+                           class="form-control"
+                           accept=".jpg,.jpeg,.png,.pdf" />
+                </div>
+
+                <div class="mb-3">
+                    <label>Emergency Contact Name</label>
+                    <input asp-for="EmergencyContactName"
+                           class="form-control" />
+                </div>
+
+                <div class="mb-3">
+                    <label>Emergency Contact Number</label>
+                    <input asp-for="EmergencyContactMobile"
+                           class="form-control" />
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- BOOKING SUMMARY -->
+
+    <div class="col-lg-4">
+
+        <div class="booking-card">
+
+            <div class="card-title-box">
+                <h4>Booking Summary</h4>
+            </div>
+
+            <div class="booking-summary">
+
+                <div class="summary-item">
+                    <span>Room Number</span>
+                    <strong>
+                            <input asp-for="RoomNumber"
+                            class="form-control"
+                            readonly />
+                    </strong>
+                </div>
+
+                <div class="summary-item">
+                    <span>Room Type</span>
+                    <strong>
+                            <input asp-for="RoomType"
+                                   class="form-control"
+                                   readonly />
+                    </strong>
+                </div>
+
+                <div class="summary-item">
+                    <span>Price Per Night</span>
+                    <strong>
+                            <input asp-for="PricePerNight"
+                                   class="form-control"
+                                   readonly />
+                    </strong>
+                </div>
+
+                <div class="summary-item">
+                    <span>Total Nights</span>
+                    <strong>
+                            <input asp-for="TotalNights"
+                                   class="form-control"
+                                   readonly />
+                    </strong>
+                </div>
+
+                <div class="summary-item">
+                    <span>Check In</span>
+                    <strong>
+                        @* @Model.CheckInDate.ToString("dd MMM yyyy") *@
+                            <input asp-for="CheckInDate"
+                            type="date"
+                                   class="form-control"
+                                   readonly />
+                        </strong>
+                </div>
+
+                <div class="summary-item">
+                    <span>Check Out</span>
+                    <strong>
+                        @* @Model.CheckOutDate.ToString("dd MMM yyyy") *@
+                            <input asp-for="CheckOutDate"
+                            type="date"
+                                   class="form-control"
+                                   readonly />
+                    </strong>
+                </div>
+
+                <div class="summary-total">
+                        <input asp-for="TotalAmount"
+                               class="form-control amount-box"
+                               readonly />
+                </div>
+
+                <button type="submit"
+                        class="confirm-btn">
+
+                    Confirm Booking
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+    </div>
+    </form>
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}

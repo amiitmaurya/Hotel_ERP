@@ -1,0 +1,89 @@
+﻿@model Demo_Project.Models.Amenity
+
+@{
+    ViewData["Title"] = "Amenity Details";
+}
+
+<link rel="stylesheet" href="~/css/Amenity/AmenityDetails.css" />
+
+<div class="container details-page">
+
+    <div class="details-card">
+
+        <div class="details-header">
+
+            <h2>Amenity Details</h2>
+
+            <p>
+                View complete amenity information
+            </p>
+
+        </div>
+
+        <div class="details-body">
+
+            <div class="detail-item">
+
+                <span class="detail-label">
+                    Amenity Name
+                </span>
+
+                <div class="detail-value">
+                    @Model.AmenityName
+                </div>
+
+            </div>
+
+            <div class="detail-item">
+
+                <span class="detail-label">
+                    Description
+                </span>
+
+                <div class="detail-value description-box">
+                    @Model.Description
+                </div>
+
+            </div>
+
+            <div class="detail-item">
+
+                <span class="detail-label">
+                    Status
+                </span>
+
+                <div>
+
+                    @if (Model.IsActive)
+                    {
+                        <span class="status-active">
+                            Active
+                        </span>
+                    }
+                    else
+                    {
+                        <span class="status-inactive">
+                            Inactive
+                        </span>
+                    }
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="details-footer">
+
+            <a asp-action="Index"
+                   class="btn back-btn">
+
+                Back
+
+            </a>
+
+        </div>
+
+    </div>
+
+</div>

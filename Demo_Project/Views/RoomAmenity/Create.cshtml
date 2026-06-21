@@ -1,0 +1,91 @@
+﻿@model Demo_Project.Models.RoomAmenity
+
+<link href="~/css/roomamenity/create.css" rel="stylesheet" />
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show">
+        @TempData["Success"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+}
+
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show">
+        @TempData["Error"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+}
+
+<div class="roomamenity-container">
+
+    <div class="page-header">
+
+        <div>
+            <h2>🛏️ Add Room Amenity</h2>
+            <p>Assign amenities to hotel rooms</p>
+        </div>
+
+    </div>
+
+    <div class="roomamenity-card">
+
+        <form asp-action="Create" method="post">
+
+            
+
+            <div class="mb-4">
+
+                <label class="form-label">
+                    Room
+                </label>
+
+                <select asp-for="RoomId"
+                        asp-items="ViewBag.RoomId"
+                        class="form-control custom-input" required>
+
+                    <option value="">
+                        -- Select Room --
+                    </option>
+
+                </select>
+
+            </div>
+
+            <div class="mb-4">
+
+                <label class="form-label">
+                    Amenity
+                </label>
+
+                <select asp-for="AmenityId"
+                        asp-items="ViewBag.AmenityId"
+                        class="form-control custom-input" required>
+
+                    <option value="">
+                        -- Select Amenity --
+                    </option>
+
+                </select>
+
+            </div>
+
+            <div class="action-buttons">
+
+                <button type="submit"
+                        class="btn-save">
+                    Save Assignment
+                </button>
+
+                <a asp-action="Index"
+                       class="btn-back">
+                    Back
+                </a>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>

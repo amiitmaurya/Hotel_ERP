@@ -1,0 +1,182 @@
+﻿@model List<Demo_Project.Models.Booking>
+@using Demo_Project.Models.Enums
+
+<link href="~/css/checkin/checkinlist.css" rel="stylesheet" />
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show">
+        @TempData["Success"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+}
+
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show">
+        @TempData["Error"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+}
+
+<div class="checkin-wrapper">
+
+    <div class="checkin-header">
+
+        <div>
+            <h2>🏨 Guest Check-In Management</h2>
+            <p>Manage arrivals, room occupancy and guest status</p>
+        </div>
+
+        <div class="stats-box">
+            <span>Total Bookings : @Model.Count</span>
+        </div>
+
+    </div>
+
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success">
+            @TempData["Success"]
+        </div>
+    }
+
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert alert-danger">
+            @TempData["Error"]
+        </div>
+    }
+
+    <div class="table-responsive">
+
+        <table class="checkin-table">
+
+            <thead>
+                <tr>
+                    <th>Booking No</th>
+                    <th>Guest</th>
+                    <th>Room</th>
+                    <th>Check In</th>
+                    <th>Check Out</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+
+                        <td>
+                            <strong>@item.BookingNumber</strong>
+                        </td>
+
+                        <td>
+                            <div class="guest-info">
+                                <span>@item.Customer?.FullName</span>
+                            </div>
+                        </td>
+
+                        <td>@item.Room?.RoomNumber</td>
+
+                        <td>
+                            @item.CheckInDate.ToString("dd MMM yyyy")
+                        </td>
+
+                        <td>
+                            @item.CheckOutDate.ToString("dd MMM yyyy")
+                        </td>
+
+                        <td>
+
+                            @if (item.Status == BookingStatus.Cancelled)
+                            {
+                                <span class="status cancelled">
+                                    Cancelled
+                                </span>
+                            }
+                            else if (item.Status == BookingStatus.CheckedOut)
+                            {
+                                <span class="status checkout">
+                                    Checked Out
+                                </span>
+                            }
+                            else if (item.Status == BookingStatus.CheckedIn)
+                            {
+                                <span class="status checkin">
+                                    Checked In
+                                </span>
+                            }
+                            else if (DateTime.Today < item.CheckInDate.Date)
+                            {
+                                <span class="status upcoming">
+                                    Upcoming
+                                </span>
+                            }
+                            else
+                            {
+                                <span class="status pending">
+                                    Pending Check-In
+                                </span>
+                            }
+
+                        </td>
+
+                        <td>
+
+                            @{
+                                var today = DateTime.Today;
+
+                                bool canCheckIn =
+                                item.Status == BookingStatus.Booked
+                                && today >= item.CheckInDate.Date
+                                && today < item.CheckOutDate.Date;
+                            }
+
+                            @if (canCheckIn)
+                            {
+                                <a asp-action="Create"
+                                       asp-route-bookingId="@item.Id"
+                                       class="btn-action checkin-btn">
+                                    Check In
+                                </a>
+                            }
+                            else if (item.Status == BookingStatus.CheckedIn)
+                            {
+                                <button class="btn-action disabled-btn" disabled>
+                                    Checked In
+                                </button>
+                            }
+                            else if (item.Status == BookingStatus.CheckedOut)
+                            {
+                                <button class="btn-action disabled-btn" disabled>
+                                    Checked Out
+                                </button>
+                            }
+                            else if (item.Status == BookingStatus.Cancelled)
+                            {
+                                <button class="btn-action cancel-btn" disabled>
+                                    Cancelled
+                                </button>
+                            }
+                            else
+                            {
+                                <button class="btn-action disabled-btn" disabled>
+                                    Check In
+                                </button>
+                            }
+
+                        </td>
+
+                    </tr>
+                }
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>

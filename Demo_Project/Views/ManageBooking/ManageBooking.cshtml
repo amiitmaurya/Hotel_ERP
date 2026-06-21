@@ -1,0 +1,151 @@
+﻿@model IEnumerable<Demo_Project.Models.ManageBookingVM>
+@using Demo_Project.Models.Enums
+
+
+<link href="~/css/managebooking/managebooking.css" rel="stylesheet" />
+
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show">
+        @TempData["Success"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+}
+
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show">
+        @TempData["Error"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+}
+
+<div class="booking-wrapper">
+
+    <div class="booking-header">
+
+        <div>
+            <h2>📋 Manage Bookings</h2>
+            <p>View, edit and manage hotel reservations</p>
+        </div>
+
+        <div class="stats-box">
+            <span>Total Bookings : @Model.Count()</span>
+        </div>
+
+    </div>
+
+    <div class="table-responsive">
+
+        <table class="booking-table">
+
+            <thead>
+                <tr>
+                    <th>Booking No</th>
+                    <th>Customer</th>
+                    <th>Room</th>
+                    <th>Check In</th>
+                    <th>Check Out</th>
+                    <th>Guests</th>
+                    <th>Amount</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+
+                        <td>
+                            <strong>@item.BookingNumber</strong>
+                        </td>
+
+                        <td>
+                            <div class="customer-info">
+                                <span>@item.CustomerName</span>
+                                <small>@item.Mobile</small>
+                            </div>
+                        </td>
+
+                        <td>@item.RoomNumber</td>
+
+                        <td>
+                            @item.CheckInDate.ToString("dd MMM yyyy")
+                        </td>
+
+                        <td>
+                            @item.CheckOutDate.ToString("dd MMM yyyy")
+                        </td>
+
+                        <td>
+                            @(item.Adults + item.Children)
+                        </td>
+
+                        <td>
+                            ₹ @item.TotalAmount.ToString("N0")
+                        </td>
+
+                        <td>
+
+                            @if (item.Status == BookingStatus.Booked)
+                            {
+                                <span class="status booked">Booked</span>
+                            }
+                            else if (item.Status == BookingStatus.CheckedIn)
+                            {
+                                <span class="status checkin">Checked In</span>
+                            }
+                            else if (item.Status == BookingStatus.CheckedOut)
+                            {
+                                <span class="status checkout">Checked Out</span>
+                            }
+                            else if (item.Status == BookingStatus.Cancelled)
+                            {
+                                <span class="status cancelled">Cancelled</span>
+                            }
+
+                        </td>
+
+                        <td>
+
+                            <div class="action-buttons">
+
+                                <a asp-controller="Booking"
+                                       asp-action="Invoice"
+                                       asp-route-id="@item.Id"
+                                       class="btn-action invoice">
+                                    Invoice
+                                </a>
+                                @if (item.Status != BookingStatus.Cancelled && item.Status != BookingStatus.CheckedIn && item.Status != BookingStatus.CheckedOut)
+                                {
+                                    <a asp-action="EditBooking"
+                                    asp-route-id="@item.Id"
+                                    class="btn-action edit">
+                                        Edit
+                                    </a>
+                               
+                                    <a asp-action="CancelBooking"
+                                           asp-route-id="@item.Id"
+                                           onclick="return confirm('Cancel this booking?')"
+                                           class="btn-action cancel">
+                                        Cancel
+                                    </a>
+                                }
+
+                            </div>
+
+                        </td>
+
+                    </tr>
+                }
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>

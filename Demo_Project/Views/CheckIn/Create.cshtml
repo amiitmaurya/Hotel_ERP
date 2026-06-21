@@ -1,0 +1,121 @@
+﻿@model Demo_Project.Models.Booking
+
+
+<link href="~/css/checkin/create.css" rel="stylesheet" />
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show">
+        @TempData["Success"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+}
+
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show">
+        @TempData["Error"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+}
+
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show">
+        @TempData["Success"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+}
+
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show">
+        @TempData["Error"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+}
+
+<div class="checkin-container">
+
+    <div class="checkin-header">
+
+        <div>
+            <h2>🏨 Guest Check In</h2>
+            <p>Verify booking details and complete guest arrival</p>
+        </div>
+
+        <div class="booking-badge">
+            @Model.BookingNumber
+        </div>
+
+    </div>
+
+    <div class="guest-card">
+
+        <div class="detail-grid">
+
+            <div class="detail-item">
+                <span>Guest Name</span>
+                <strong>@Model.Customer?.FullName</strong>
+            </div>
+
+            <div class="detail-item">
+                <span>Room Number</span>
+                <strong>@Model.Room?.RoomNumber</strong>
+            </div>
+
+            <div class="detail-item">
+                <span>Adults</span>
+                <strong>@Model.Adults</strong>
+            </div>
+
+            <div class="detail-item">
+                <span>Children</span>
+                <strong>@Model.Children</strong>
+            </div>
+
+            <div class="detail-item">
+                <span>Check In Date</span>
+                <strong>
+                    @Model.CheckInDate.ToString("dd MMM yyyy")
+                </strong>
+            </div>
+
+            <div class="detail-item">
+                <span>Check Out Date</span>
+                <strong>
+                    @Model.CheckOutDate.ToString("dd MMM yyyy")
+                </strong>
+            </div>
+
+        </div>
+
+        <div class="info-box">
+            ⏰ Check-In Time will be captured automatically when you confirm.
+        </div>
+
+        <form asp-action="Create" method="post">
+
+            <input type="hidden"
+                   name="bookingId"
+                   value="@Model.Id" />
+
+            <div class="action-buttons">
+
+                <button type="submit"
+                        class="btn-checkin">
+                    ✓ Mark Check In
+                </button>
+
+                <a asp-controller="CheckIn"
+                       asp-action="Index"
+                       class="btn-back">
+                    ← Back
+                </a>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>

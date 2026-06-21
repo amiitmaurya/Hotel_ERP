@@ -1,0 +1,120 @@
+﻿.amenity-wrapper {
+    background: #fff;
+    padding: 30px;
+    border-radius: 25px;
+    box-shadow: 0 10px 30px rgba(0,0,0,.08);
+}
+
+.amenity-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+    .amenity-header h2 {
+        font-size: 34px;
+        font-weight: 700;
+        margin-bottom: 5px;
+    }
+
+    .amenity-header p {
+        color: #6c757d;
+        margin: 0;
+    }
+
+.btn-create {
+    background: #2fa36b;
+    color: white;
+    text-decoration: none;
+    padding: 12px 22px;
+    border-radius: 12px;
+    font-weight: 600;
+}
+
+    .btn-create:hover {
+        color: white;
+        opacity: .9;
+    }
+
+.stats-box {
+    display: inline-block;
+    background: #f5f7fb;
+    padding: 12px 20px;
+    border-radius: 12px;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.amenity-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+    .amenity-table thead {
+        background: #f5f7fb;
+    }
+
+    .amenity-table th {
+        padding: 18px;
+        font-weight: 700;
+        color: #444;
+    }
+
+    .amenity-table td {
+        padding: 18px;
+        border-top: 1px solid #eee;
+        vertical-align: middle;
+    }
+
+    .amenity-table tbody tr:hover {
+        background: #fafafa;
+    }
+
+.status {
+    padding: 8px 14px;
+    border-radius: 30px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.active {
+    background: #e8f8ee;
+    color: #198754;
+}
+
+.inactive {
+    background: #ffe5e5;
+    color: #dc3545;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 8px;
+}
+
+.btn-action {
+    text-decoration: none;
+    padding: 8px 14px;
+    border-radius: 10px;
+    color: white;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.edit {
+    background: #0d6efd;
+}
+
+.details {
+    background: #f0ad4e;
+}
+
+.delete {
+    background: #dc3545;
+}
+
+.btn-action:hover {
+    opacity: .9;
+    color: white;
+}

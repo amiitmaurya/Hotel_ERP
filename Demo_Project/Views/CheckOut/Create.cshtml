@@ -1,0 +1,120 @@
+﻿@model Demo_Project.Models.Booking
+
+<link href="~/css/checkout/create.css" rel="stylesheet" />
+
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show">
+        @TempData["Success"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+}
+
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show">
+        @TempData["Error"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+}
+
+<div class="checkout-container">
+
+    <div class="checkout-header">
+
+        <div>
+            <h2>🚪 Guest Check Out</h2>
+            <p>Review stay details and complete guest departure</p>
+        </div>
+
+        <div class="booking-badge">
+            @Model.BookingNumber
+        </div>
+
+    </div>
+
+    <div class="checkout-card">
+
+        <div class="detail-grid">
+
+            <div class="detail-item">
+                <span>Guest Name</span>
+                <strong>@Model.Customer?.FullName</strong>
+            </div>
+
+            <div class="detail-item">
+                <span>Room Number</span>
+                <strong>@Model.Room?.RoomNumber</strong>
+            </div>
+
+            <div class="detail-item">
+                <span>Check In Date</span>
+                <strong>
+                    @Model.CheckInDate.ToString("dd MMM yyyy")
+                </strong>
+            </div>
+
+            <div class="detail-item">
+                <span>Check Out Date</span>
+                <strong>
+                    @Model.CheckOutDate.ToString("dd MMM yyyy")
+                </strong>
+            </div>
+
+        </div>
+
+        <form asp-action="Create" method="post">
+
+            <input type="hidden"
+                   name="BookingId"
+                   value="@Model.Id" />
+
+            <div class="form-section">
+
+                <div class="mb-3">
+                    <label class="form-label">
+                        Extra Charges (₹)
+                    </label>
+
+                    <input type="number"
+                           name="ExtraCharges"
+                           class="form-control custom-input"
+                           value="0" />
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">
+                        Remarks
+                    </label>
+
+                    <textarea name="Remarks"
+                              rows="4"
+                              class="form-control custom-input"></textarea>
+                </div>
+
+            </div>
+
+            <div class="warning-box">
+                ⚠ Please verify room condition and pending charges before checkout.
+            </div>
+
+            <div class="action-buttons">
+
+                <button type="submit"
+                        class="btn-checkout">
+                    Complete Check Out
+                </button>
+
+                <a asp-controller="CheckOut"
+                       asp-action="Index"
+                       class="btn-back">
+                    Back
+                </a>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>

@@ -1,0 +1,114 @@
+﻿@model IEnumerable<Demo_Project.Models.Amenity>
+
+<link href="~/css/amenity/index.css" rel="stylesheet" />
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show">
+        @TempData["Success"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+}
+
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show">
+        @TempData["Error"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+}
+
+<div class="amenity-wrapper">
+
+    <div class="amenity-header">
+
+        <div>
+            <h2>✨ Amenities Management</h2>
+            <p>Manage hotel facilities and room services</p>
+        </div>
+
+        <a asp-action="Create" class="btn-create">
+            + Add Amenity
+        </a>
+
+    </div>
+
+    <div class="stats-box">
+        Total Amenities : @Model.Count()
+    </div>
+
+    <div class="table-responsive">
+
+        <table class="amenity-table">
+
+            <thead>
+                <tr>
+                    <th>Amenity Name</th>
+                    <th>Description</th>
+                    <th>Status</th>
+                    <th width="250">Actions</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+
+                        <td>
+                            <strong>@item.AmenityName</strong>
+                        </td>
+
+                        <td>
+                            @item.Description
+                        </td>
+
+                        <td>
+
+                            @if (item.IsActive)
+                            {
+                                <span class="status active">
+                                    Active
+                                </span>
+                            }
+                            else
+                            {
+                                <span class="status inactive">
+                                    Inactive
+                                </span>
+                            }
+
+                        </td>
+
+                        <td>
+
+                            <div class="action-buttons">
+
+                                <a asp-action="Edit"
+                                       asp-route-id="@item.Id"
+                                       class="btn-action edit">
+                                    Edit
+                                </a>
+
+                               
+
+                                <a asp-action="Delete"
+                                       asp-route-id="@item.Id"
+                                       class="btn-action delete">
+                                    Delete
+                                </a>
+
+                            </div>
+
+                        </td>
+
+                    </tr>
+                }
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>

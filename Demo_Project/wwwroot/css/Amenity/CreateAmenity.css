@@ -1,0 +1,140 @@
+﻿body {
+    background: linear-gradient(135deg,#031327,#041d43,#02152d);
+    min-height: 100vh;
+}
+
+.amenity-page {
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 30px 15px;
+}
+
+.amenity-card {
+    width: 100%;
+    max-width: 700px;
+    background: rgba(6,18,45,.82);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(34,211,238,.15);
+    border-radius: 28px;
+    padding: 35px;
+    box-shadow: 0 0 35px rgba(34,211,238,.08);
+}
+
+.page-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+    .page-header h2 {
+        color: white;
+        font-size: 34px;
+        font-weight: 700;
+        margin-bottom: 8px;
+    }
+
+    .page-header p {
+        color: #94a3b8;
+        margin: 0;
+    }
+
+.form-group-custom {
+    margin-bottom: 22px;
+}
+
+label {
+    color: white;
+    font-weight: 600;
+    margin-bottom: 8px;
+    display: block;
+}
+
+.form-control {
+    background: rgba(255,255,255,.05);
+    border: 1px solid rgba(255,255,255,.10);
+    color: white;
+    border-radius: 14px;
+    min-height: 52px;
+}
+
+textarea.form-control {
+    min-height: 140px;
+    resize: vertical;
+}
+
+.form-control:focus,
+textarea:focus {
+    background: rgba(255,255,255,.08);
+    color: white;
+    border-color: #22d3ee;
+    box-shadow: 0 0 15px rgba(34,211,238,.30);
+}
+
+.custom-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 25px;
+}
+
+.form-check-input {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.form-check-label {
+    margin-bottom: 0;
+    cursor: pointer;
+}
+
+.save-btn {
+    width: 100%;
+    border: none;
+    border-radius: 14px;
+    padding: 14px;
+    font-size: 16px;
+    font-weight: 600;
+    color: white;
+    background: linear-gradient(90deg,#06b6d4,#0891b2);
+    transition: .3s;
+}
+
+    .save-btn:hover {
+        color: white;
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px rgba(34,211,238,.30);
+    }
+
+@media (max-width: 768px) {
+
+    .amenity-card {
+        padding: 25px;
+        border-radius: 22px;
+    }
+
+    .page-header h2 {
+        font-size: 26px;
+    }
+}
+
+@media (max-width: 576px) {
+
+    .amenity-card {
+        padding: 20px;
+        border-radius: 18px;
+    }
+
+    .page-header h2 {
+        font-size: 22px;
+    }
+
+    .page-header p {
+        font-size: 14px;
+    }
+
+    .form-control {
+        min-height: 48px;
+    }
+}

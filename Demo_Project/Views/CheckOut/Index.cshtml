@@ -1,0 +1,149 @@
+﻿@model List<Demo_Project.Models.Booking>
+@using Demo_Project.Models.Enums
+
+<link href="~/css/checkout/checkoutlist.css" rel="stylesheet" />
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show">
+        @TempData["Success"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+}
+
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show">
+        @TempData["Error"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+}
+
+<div class="checkout-wrapper">
+
+    <div class="checkout-header">
+
+        <div>
+            <h2>🚪 Guest Check-Out Management</h2>
+            <p>Manage guest departures and room release process</p>
+        </div>
+
+        <div class="stats-box">
+            Total Bookings : @Model.Count
+        </div>
+
+    </div>
+
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success">
+            @TempData["Success"]
+        </div>
+    }
+
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert alert-danger">
+            @TempData["Error"]
+        </div>
+    }
+
+    <div class="table-responsive">
+
+        <table class="checkout-table">
+
+            <thead>
+                <tr>
+                    <th>Booking No</th>
+                    <th>Guest</th>
+                    <th>Room</th>
+                    <th>Check In</th>
+                    <th>Check Out</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+
+                        <td>
+                            <strong>@item.BookingNumber</strong>
+                        </td>
+
+                        <td>@item.Customer?.FullName</td>
+
+                        <td>@item.Room?.RoomNumber</td>
+
+                        <td>
+                            @item.CheckInDate.ToString("dd MMM yyyy")
+                        </td>
+
+                        <td>
+                            @item.CheckOutDate.ToString("dd MMM yyyy")
+                        </td>
+
+                        <td>
+
+                            @if (item.Status == BookingStatus.Cancelled)
+                            {
+                                <span class="status cancelled">Cancelled</span>
+                            }
+                            else if (item.Status == BookingStatus.CheckedOut)
+                            {
+                                <span class="status checkout">Checked Out</span>
+                            }
+                            else if (item.Status == BookingStatus.CheckedIn)
+                            {
+                                <span class="status checkin">Checked In</span>
+                            }
+                            else if (DateTime.Today < item.CheckInDate.Date)
+                            {
+                                <span class="status upcoming">Upcoming</span>
+                            }
+                            else
+                            {
+                                <span class="status pending">
+                                    Pending Check-In
+                                </span>
+                            }
+
+                        </td>
+
+                        <td>
+
+                            @if (item.Status == BookingStatus.CheckedIn)
+                            {
+                                <a asp-action="Create"
+                                       asp-route-bookingId="@item.Id"
+                                       class="btn-action checkout-btn">
+                                    Check Out
+                                </a>
+                            }
+                            else if (item.Status == BookingStatus.CheckedOut)
+                            {
+                                <button class="btn-action disabled-btn" disabled>
+                                    Checked Out
+                                </button>
+                            }
+                            else
+                            {
+                                <button class="btn-action disabled-btn" disabled>
+                                    Check Out
+                                </button>
+                            }
+
+                        </td>
+
+                    </tr>
+                }
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>

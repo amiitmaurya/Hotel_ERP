@@ -1,0 +1,105 @@
+﻿body {
+    background: #f5f7f9;
+}
+
+.invoice-page {
+    padding: 30px;
+}
+
+.invoice-header-box {
+    background: white;
+    padding: 25px 30px;
+    border-radius: 20px;
+    box-shadow: 0 8px 25px rgba(0,0,0,.05);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+    .invoice-header-box h2 {
+        margin: 0;
+        font-weight: 700;
+    }
+
+    .invoice-header-box p {
+        margin: 5px 0 0;
+        color: #777;
+    }
+
+.invoice-count {
+    background: #dff5e8;
+    color: #2f9e66;
+    padding: 12px 20px;
+    border-radius: 30px;
+    font-weight: 600;
+}
+
+.invoice-table-card {
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 8px 25px rgba(0,0,0,.05);
+}
+
+.custom-table {
+    margin-bottom: 0;
+}
+
+    .custom-table thead {
+        background: #0f172a;
+    }
+
+        .custom-table thead th {
+            color: white;
+            border: none;
+            padding: 18px;
+            font-weight: 600;
+        }
+
+    .custom-table tbody td {
+        padding: 18px;
+        vertical-align: middle;
+    }
+
+    .custom-table tbody tr {
+        transition: .3s;
+    }
+
+        .custom-table tbody tr:hover {
+            background: #f8fafc;
+        }
+
+.status-paid {
+    background: #dff5e8;
+    color: #2f9e66;
+    padding: 7px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.status-cancelled {
+    background: #ffe3e3;
+    color: #dc3545;
+    padding: 7px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.view-btn {
+    background: #2f9e66;
+    color: white;
+    text-decoration: none;
+    padding: 10px 16px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    display: inline-block;
+}
+
+    .view-btn:hover {
+        background: #238453;
+        color: white;
+    }

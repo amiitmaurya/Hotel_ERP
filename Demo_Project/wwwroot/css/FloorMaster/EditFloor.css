@@ -1,0 +1,163 @@
+﻿body {
+    background: linear-gradient(135deg,#031327,#041d43,#02152d);
+    min-height: 100vh;
+}
+
+.floor-page {
+    min-height: 85vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 30px 15px;
+}
+
+.floor-card {
+    width: 100%;
+    max-width: 750px;
+    background: rgba(6,18,45,.82);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(34,211,238,.15);
+    border-radius: 28px;
+    padding: 35px;
+    box-shadow: 0 0 35px rgba(34,211,238,.08);
+}
+
+.page-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+    .page-header h2 {
+        color: white;
+        font-size: 34px;
+        font-weight: 700;
+        margin-bottom: 8px;
+    }
+
+    .page-header p {
+        color: #94a3b8;
+        margin: 0;
+    }
+
+.form-group-custom {
+    margin-bottom: 22px;
+}
+
+label {
+    color: white;
+    font-weight: 600;
+    margin-bottom: 8px;
+    display: block;
+}
+
+.form-control {
+    background: rgba(255,255,255,.05);
+    border: 1px solid rgba(255,255,255,.10);
+    color: white;
+    border-radius: 14px;
+    min-height: 52px;
+}
+
+    .form-control:focus {
+        background: rgba(255,255,255,.08);
+        color: white;
+        border-color: #22d3ee;
+        box-shadow: 0 0 15px rgba(34,211,238,.30);
+    }
+
+.custom-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 30px;
+}
+
+.form-check-input {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.form-check-label {
+    margin-bottom: 0;
+    cursor: pointer;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.update-btn {
+    flex: 1;
+    border: none;
+    border-radius: 14px;
+    padding: 14px;
+    font-size: 16px;
+    font-weight: 600;
+    color: white;
+    background: linear-gradient(90deg,#06b6d4,#0891b2);
+    transition: .3s;
+}
+
+    .update-btn:hover {
+        color: white;
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px rgba(34,211,238,.30);
+    }
+
+.back-btn {
+    border-radius: 14px;
+    padding: 14px 30px;
+    font-weight: 600;
+    color: #e2e8f0;
+    background: rgba(255,255,255,.08);
+    border: 1px solid rgba(255,255,255,.10);
+}
+
+    .back-btn:hover {
+        color: white;
+        background: rgba(255,255,255,.12);
+    }
+
+@media (max-width: 768px) {
+
+    .floor-card {
+        padding: 25px;
+        border-radius: 22px;
+    }
+
+    .page-header h2 {
+        font-size: 28px;
+    }
+}
+
+@media (max-width: 576px) {
+
+    .floor-card {
+        padding: 20px;
+        border-radius: 18px;
+    }
+
+    .page-header h2 {
+        font-size: 24px;
+    }
+
+    .page-header p {
+        font-size: 14px;
+    }
+
+    .action-buttons {
+        flex-direction: column;
+    }
+
+    .update-btn,
+    .back-btn {
+        width: 100%;
+    }
+
+    .form-control {
+        min-height: 48px;
+    }
+}

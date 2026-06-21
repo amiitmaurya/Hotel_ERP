@@ -1,0 +1,109 @@
+﻿.room-container {
+    background: #fff;
+    padding: 30px;
+    border-radius: 25px;
+    box-shadow: 0 10px 30px rgba(0,0,0,.08);
+}
+
+.page-header {
+    margin-bottom: 25px;
+    border-bottom: 1px solid #e9ecef;
+    padding-bottom: 15px;
+}
+
+    .page-header h2 {
+        font-size: 34px;
+        font-weight: 700;
+        margin-bottom: 5px;
+        color: #1f2937;
+    }
+
+    .page-header p {
+        color: #6c757d;
+        margin: 0;
+        font-size: 18px;
+    }
+
+.room-card {
+    background: #fafafa;
+    padding: 30px;
+    border-radius: 20px;
+}
+
+.form-label {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #1f2937;
+}
+
+.custom-input,
+.form-select {
+    height: 55px;
+    border-radius: 14px;
+    border: 1px solid #dcdcdc;
+    padding: 12px 16px;
+    font-size: 16px;
+    background: #fff;
+}
+
+    .custom-input:focus,
+    .form-select:focus {
+        border-color: #2fa36b;
+        box-shadow: 0 0 0 0.2rem rgba(47,163,107,.15);
+    }
+
+textarea.custom-input {
+    min-height: 140px;
+    resize: none;
+}
+
+.status-box {
+    background: #fff;
+    border: 1px solid #e9ecef;
+    border-radius: 15px;
+    padding: 20px;
+    margin-top: 15px;
+}
+
+.form-check-label {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.form-check-input {
+    width: 22px;
+    height: 22px;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 15px;
+    margin-top: 25px;
+}
+
+.btn-save {
+    background: #2fa36b;
+    color: #fff;
+    border: none;
+    padding: 14px 30px;
+    border-radius: 14px;
+    font-weight: 600;
+    font-size: 18px;
+}
+
+.btn-back {
+    background: #6c757d;
+    color: #fff;
+    text-decoration: none;
+    padding: 14px 30px;
+    border-radius: 14px;
+    font-weight: 600;
+    font-size: 18px;
+}
+
+    .btn-save:hover,
+    .btn-back:hover {
+        opacity: .9;
+        color: #fff;
+    }

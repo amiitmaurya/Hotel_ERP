@@ -1,0 +1,122 @@
+﻿@model IEnumerable<Demo_Project.Models.RoomImage>
+
+<link href="~/css/roomimages/index.css" rel="stylesheet" />
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show">
+        @TempData["Success"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+}
+
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show">
+        @TempData["Error"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+}
+
+<div class="roomimage-wrapper">
+
+    <div class="roomimage-header">
+
+        <div>
+            <h2>📸 Room Image Gallery</h2>
+            <p>Manage room images and primary display photos</p>
+        </div>
+
+        <a asp-action="Create"
+               asp-route-roomId="@ViewBag.RoomId"
+               class="btn-create">
+            + Add Image
+        </a>
+
+    </div>
+
+    <div class="stats-box">
+        Total Images : @Model.Count()
+    </div>
+
+    <div class="table-responsive">
+
+        <table class="roomimage-table">
+
+            <thead>
+                <tr>
+                    <th>Room No</th>
+                    <th>Preview</th>
+                    <th>Image Path</th>
+                    <th>Primary</th>
+                    <th width="220">Actions</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+
+                        <td>
+                            <strong>@item.Room?.RoomNumber</strong>
+                        </td>
+
+                        <td>
+                            <img src="@Url.Content(item.ImagePath)"
+                                 class="room-thumb" />
+                        </td>
+
+                        <td>
+                            <small class="path-text">
+                                @item.ImagePath
+                            </small>
+                        </td>
+
+                        <td>
+
+                            @if (item.IsPrimary)
+                            {
+                                <span class="status primary">
+                                    Primary
+                                </span>
+                            }
+                            else
+                            {
+                                <span class="status secondary">
+                                    Secondary
+                                </span>
+                            }
+
+                        </td>
+
+                        <td>
+
+                            <div class="action-buttons">
+
+                                <a asp-action="Edit"
+                                       asp-route-id="@item.Id"
+                                       class="btn-action edit">
+                                    Edit
+                                </a>
+
+                                <a asp-action="Delete"
+                                       asp-route-id="@item.Id"
+                                       class="btn-action delete">
+                                    Delete
+                                </a>
+
+                            </div>
+
+                        </td>
+
+                    </tr>
+                }
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
